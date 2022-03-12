@@ -1,0 +1,68 @@
+﻿@model IEnumerable<Employee>
+@{
+    ViewBag.Title = "Employees List";
+}
+@*<table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Department</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var emp in Model)
+            {
+                <tr>
+                    <td>@emp.Id</td>
+                    <td>@emp.Name</td>
+                    <td>@emp.Department</td>
+                </tr>
+
+            }
+        </tbody>
+    </table>*@
+
+
+
+
+<div class="card-deck">
+    <div class="row">
+        @foreach (var emp in Model)
+        {
+            var photoPath = "~/images/" + (emp.PhotoPath ?? "f1.png");
+
+
+            <div class="col-4">
+                <div class="card m-4">
+
+                    <div class="card-header">
+                        <h3>@emp.Name</h3>
+                    </div>
+                    <img class="imageThumbnail card-img-top " src="@photoPath"
+                         asp-append-version="true" />
+                    <div class="card-footer text-center">
+                        <a asp-controller="home" asp-action="details" asp-route-id="@emp.Id"
+                           class="btn btn-primary m-1">View</a>
+
+                        <a asp-action="Edit" asp-controller="home" asp-route-id="@emp.Id" class="btn btn-primary m-1">Edit</a>
+                        <a href="#" class="btn btn-danger m-1">Delete</a>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    </div>
+</div>
+
+
+
+
+
+
+
+
+@*<a href="@Url.Action("details", "home", new { id=emp.Id})" class="btn btn-primary">Show</a>
+    @Html.ActionLink("View","details","home", new {id=emp.Id })*@
+<!--<a href="/home/details/@**@emp.Id" class="btn btn-primary">View</a>-->
